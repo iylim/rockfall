@@ -1,0 +1,31 @@
+generate board can be reset when no moves
+listen for click events
+
+refilling board
+
+handleClick
+check clicks are adjacent 
+
+Match check to see if match 3 in a row or more 
+clear matched tiles
+add to score
+
+combo getMatches
+multiplier score
+
+countdown time
+
+PseudoCode
+8x8 board generated at start of game.
+player clicks on tile to start game
+timer starts
+
+player must select two adjacent tiles to swap
+check to see if matches are 3 ore more in a row.
+if yes-add points and clear matched tiles(render)
+if No-(shake animation?) cannot make moves
+
+check matches 
+swapping tiles
+
+game ends when timer stops

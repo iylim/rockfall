@@ -1,0 +1,67 @@
+body {
+margin: 30px;
+background-color: rgb(46, 51, 51);
+}
+
+div {
+    display: inline-table;
+    border-spacing: 0;
+}
+div.sidenav{
+width: 150px;
+height: 502px;
+border: 1px dotted white;
+align-content: center;
+overflow: hidden;
+}
+
+
+p {
+height: 50px;
+width: 100px;
+padding: 10px;
+background-color: gray;
+border: 3px solid black;
+text-align: center;
+}
+
+h2 {
+color: whitesmoke; 
+text-align: center;
+font-size: 25px;
+}
+
+p.score {
+    margin: 50px 0;
+    display: inline-block;
+
+}
+
+p.time {
+    display: inline-block;
+    margin: 30px 0;
+}
+
+    
+.table-bordered {
+    height: 500px;
+    width: 500px;
+    text-align: center;
+    border: 3px solid gold;
+}
+tr {
+    border-spacing: 0;
+  display: flex;
+}
+td {
+    width: 62px;
+    height: 62px;
+    margin: auto;
+    border-spacing: 0;
+display: flex;
+text-align: center;
+}
+
+img {
+    image-resolution: 60px 60px;
+}
