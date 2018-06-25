@@ -1,7 +1,12 @@
 /*----- constants -----*/
 var boardSize = 8;
 var rocks = ['images/rock1.png', 'images/rock2.png', 'images/Stone_Icon.png', 'images/rock3.png', 'images/rock4.png', 'images/rock4.png'];
-
+var diff = {
+3: 10,
+4: 20,
+5: 30,
+6: 50
+}
 
 /*----- app's state (variables) -----*/
 var board, firstRockIdx, score;
@@ -31,11 +36,25 @@ function handleBoardClick(evt) {
             }
         }, 1000); 
     }
-
     if (!clickCheck(boardIndex)) firstRockIdx = null;
-    render();
-    getMatches();
+    render();    
 } 
+
+function score() {
+    if (getMatches === true) {
+    //update score 
+        function handleUpdateScore(diff) {
+        scoreEl += diff;
+    
+    // 2 matches in a row = +10pt bonus
+    // 3 matches in a row = +20pt bonus 
+    //4 matches in a row = +30pt bonus
+
+}
+   //clear matched tiles
+    }
+    render();
+}
 
 function clickCheck(clickedIdx) {
     if (firstRockIdx === null) {
@@ -54,25 +73,23 @@ function clickCheck(clickedIdx) {
     return false;
 }
 
-
-// Match check to see if match 3 in a row or more 
-// clear matched tiles
-// add to score based on how many was removed
-
- function getMatches(board) {
-    return board.forEach(function(a, i, aa) {
-    if(i > 0 && a === aa[i-2] && a === aa[i-1]) {
-        return 'match found!';
+function getMatches(board) {
+    var board = this.board;
+    var amount = 3;
+    var last = null;
+    var count = 0;
+    for (var i = 0; i < board.length; i++) {
+        if (board[i] != last) {
+            last = board[i];
+            count = 0;
+        }
+        count += 1;
+        if (amount <= count) {
+            return true;
+        }
     }
-});
-
-render();
+    return false;
 }
-
-
-// multiplier score
-
-
 
 function initialize() {
     time = 0;
@@ -88,9 +105,6 @@ function render() {
     });  
 } 
 
-
-// play again
-
 function initBoard() {
     board = new Array(boardSize * boardSize).fill(null);
     
@@ -99,24 +113,10 @@ function initBoard() {
     });
 }
 
-//+ or - 1 and boardSize to check symbols  
-
-//min and max array index
-
 function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
 
-
-//IMPORTANT UPDATE STATE then CALL RENDER
-
-// function handleUpdateScore(diff) {
-//     score += diff;
-//     render();
-// }
-
+// play again
 
 initialize();
-
-// swap values
-// render
