@@ -1,64 +1,62 @@
 body {
-margin: 30px;
-background-color: rgb(46, 51, 51);
+    margin: 30px;
+    background-color: rgb(46, 51, 51);
 }
 
 div {
     display: inline-table;
     border-spacing: 0;
 }
-div.sidenav{
-width: 150px;
-height: 502px;
-border: 1px dotted white;
-align-content: center;
-overflow: hidden;
+div.sidenav {
+    width: 150px;
+    height: 502px;
+    border: 1px dotted white;
+    align-content: center;
+    overflow: hidden;
 }
 
 
 p {
-height: 50px;
-width: 100px;
-padding: 10px;
-background-color: gray;
-border: 3px solid black;
-text-align: center;
+    height: 50px;
+    width: 100px;
+    padding: 10px;
+    background-color: gray;
+    border: 3px solid black;
+    text-align: center;
+    font-size: 14px;
 }
 
 h2 {
-color: whitesmoke; 
-text-align: center;
-font-size: 25px;
+    color: whitesmoke; 
+    text-align: center;
+    font-size: 25px;
 }
 
-.scoreNum {
-    margin: 20px 0;
-    display: inline-block;
 
-}
 
-.time {
-    display: inline-block;
-    margin: 20px 0 40px 0;
-}
-
-    
+   
 .table-bordered {
     height: 500px;
     width: 500px;
     text-align: center;
     border: 3px solid gold;
 }
+
 tr {
     border-spacing: 0;
-  display: flex;
+    display: flex;
 }
+
 td {
     width: 62px;
     height: 62px;
     margin: auto;
     border-spacing: 0;
-display: flex;
-text-align: center;
+    display: flex;
+    text-align: center;
+}
+
+td img {
+    pointer-events: none;
 }
 

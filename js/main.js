@@ -4,11 +4,13 @@ var rocks = ['images/rock1.png', 'images/rock2.png', 'images/Stone_Icon.png', 'i
 
 
 /*----- app's state (variables) -----*/
-var board, time, firstRockSelected, score;
-//player
+var board, firstRockIdx, score;
+var time, timerId;
 
 /*----- cached element references -----*/
 var boardImages = document.querySelectorAll('#board td img');
+var timeEl = document.querySelector('.time');
+var scoreEl = document.querySelector('.score');
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
@@ -16,46 +18,76 @@ document.getElementById('board').addEventListener('click', handleBoardClick);
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
-    console.log(evt.target);
+    var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
+    if (!time) {
+        time = 60;
+        timeEl.textContent = time;
+        timerId = setInterval(function() {
+            time--;
+            timeEl.textContent = time;
+            if (!time) {
+                clearInterval(timerId);
+                setTimeout(function() {alert('game over')});
+            }
+        }, 1000); 
+    }
 
-//first click check index function to check    
-//  if first rock click = true then handle second click
-// check clicks are adjacent 
+    if (!clickCheck(boardIndex)) firstRockIdx = null;
+    render();
+    getMatches();
 } 
 
-function clickCheck () {
-    //nodeList
-//     var el = getElementsByClassName('module');
-// for (var i=0; i < el.length; i++) {
-//     // Here we have the same onclick
-//     el.item(i).onclick = clickerFn;
-// }
+function clickCheck(clickedIdx) {
+    if (firstRockIdx === null) {
+        firstRockIdx = clickedIdx;
+        return true;
+    } else {
+        if (clickedIdx === firstRockIdx + 1 || clickedIdx === firstRockIdx - 1 ||
+            clickedIdx === firstRockIdx + 8 || clickedIdx === firstRockIdx - 8) {
+                // swap
+                var temp = board[clickedIdx];
+                board[clickedIdx] = board[firstRockIdx];
+                board[firstRockIdx] = temp;
+                return true;
+            }
+    }
+    return false;
 }
+
 
 // Match check to see if match 3 in a row or more 
 // clear matched tiles
-// add to score
+// add to score based on how many was removed
 
-function getMatches() {
- 
+ function getMatches(board) {
+    return board.forEach(function(a, i, aa) {
+    if(i > 0 && a === aa[i-2] && a === aa[i-1]) {
+        return 'match found!';
+    }
+});
+
+render();
 }
+
 
 // multiplier score
 
-// countdown time
+
 
 function initialize() {
-    time = 60;
+    time = 0;
     score = 0;
-    initBoard(); 
+    firstRockIdx = null;
+    initBoard();
     render();
 }
 
 function render() {
     boardImages.forEach(function(img, idx) {
         img.src = rocks[board[idx]];
-    });
+    });  
 } 
+
 
 // play again
 
@@ -75,9 +107,6 @@ function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
 
-initialize();
-
-//function test in console
 
 //IMPORTANT UPDATE STATE then CALL RENDER
 
@@ -86,3 +115,8 @@ initialize();
 //     render();
 // }
 
+
+initialize();
+
+// swap values
+// render
