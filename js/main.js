@@ -6,7 +6,7 @@ var diff = {
 4: 20,
 5: 30,
 6: 50
-}
+};
 
 /*----- app's state (variables) -----*/
 var board, firstRockIdx, score;
@@ -37,6 +37,8 @@ function handleBoardClick(evt) {
         }, 1000); 
     }
     if (!clickCheck(boardIndex)) firstRockIdx = null;
+    var matches = getMatches();
+
     render();    
 } 
 
@@ -45,12 +47,11 @@ function score() {
     //update score 
         function handleUpdateScore(diff) {
         scoreEl += diff;
-    
     // 2 matches in a row = +10pt bonus
     // 3 matches in a row = +20pt bonus 
     //4 matches in a row = +30pt bonus
 
-}
+    }
    //clear matched tiles
     }
     render();
@@ -73,22 +74,49 @@ function clickCheck(clickedIdx) {
     return false;
 }
 
-function getMatches(board) {
-    var board = this.board;
-    var amount = 3;
-    var last = null;
-    var count = 0;
-    for (var i = 0; i < board.length; i++) {
-        if (board[i] != last) {
-            last = board[i];
-            count = 0;
-        }
-        count += 1;
-        if (amount <= count) {
-            return true;
+function getMatches() {
+    // return an array of "match" arrays [10, 11, 12] or [2, 10, 18]
+    var matches = getColumnMatches();
+    matches.push(...getRowMatches());
+}
+
+function getColumnMatches() {
+    var matches = [];
+    for (var col = 0; col < boardSize; col++) {
+        var nextOffset = 0;
+        while (nextOffset < boardSize - 2) {
+            nextOffset = getVerticalMatch(matches, col, nextOffset);
         }
     }
-    return false;
+    return matches;
+}
+
+function getVerticalMatch(matches, col, offset) {
+    if (board[col + offset * boardSize] === board[col + offset * boardSize + boardSize] && board[col + offset * boardSize] === board[col + offset * boardSize + boardSize * 2]) {
+        var numRocks = 3;
+        while (board[col + offset * boardSize + boardSize * numRocks] === board[col + offset * boardSize]) {
+            numRocks++;
+        }
+        var match = [];
+        for (var i = 0; i < numRocks; i++) {
+            match.push(col + offset * boardSize + boardSize * i);
+        }
+        matches.push(match);
+        return offset + numRocks;
+    } else {
+        return offset + 1;
+    }
+}
+
+function getRowMatches() {
+    var matches = [];
+    for (var row = 0; row < boardSize; row++) {
+        var nextOffset = 0;
+        while (nextOffset < boardSize - 2) {
+            nextOffset = getVerticalMatch(matches, row, nextOffset);
+        }
+    }
+    return matches;
 }
 
 function initialize() {
