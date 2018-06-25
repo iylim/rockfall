@@ -1,12 +1,6 @@
 /*----- constants -----*/
 var boardSize = 8;
-var rocks = ['images/rock1.png', 'images/rock2.png', null, null, null, null];
-// images,
-// images,
-// images,
-// images,
-// images,
-// images]
+var rocks = ['images/rock1.png', 'images/rock2.png', 'images/Stone_Icon.png', 'images/rock3.png', 'images/rock4.png', 'images/rock4.png'];
 
 
 /*----- app's state (variables) -----*/
@@ -17,31 +11,33 @@ var board, time, firstRockSelected, score;
 var boardImages = document.querySelectorAll('#board td img');
 
 /*----- event listeners -----*/
-//document.addEventListener('click', table)
 document.getElementById('board').addEventListener('click', handleBoardClick);
+//document.querySelector()
 
 /*----- functions -----*/
-// generate board can be reset when no moves
-// listen for click events
-
-// refilling board
-
 function handleBoardClick(evt) {
     console.log(evt.target);
-//get row and column to access board array 
+
 //first click check index function to check    
 //  if first rock click = true then handle second click
 // check clicks are adjacent 
 } 
 
-
+function clickCheck () {
+    //nodeList
+//     var el = getElementsByClassName('module');
+// for (var i=0; i < el.length; i++) {
+//     // Here we have the same onclick
+//     el.item(i).onclick = clickerFn;
+// }
+}
 
 // Match check to see if match 3 in a row or more 
 // clear matched tiles
 // add to score
 
 function getMatches() {
-
+ 
 }
 
 // multiplier score
@@ -82,3 +78,11 @@ function getRockIndex() {
 initialize();
 
 //function test in console
+
+//IMPORTANT UPDATE STATE then CALL RENDER
+
+// function handleUpdateScore(diff) {
+//     score += diff;
+//     render();
+// }
+
