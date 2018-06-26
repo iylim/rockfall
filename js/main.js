@@ -1,6 +1,6 @@
 /*----- constants -----*/
 var boardSize = 8;
-var rocks = ['images/rock1.png', 'images/rock2.png', 'images/Stone_Icon.png', 'images/rock3.png', 'images/rock4.png', 'images/rock4.png'];
+var rocks = ['images/rock1.png', 'images/rock2.png', 'images/Stone_Icon.png', 'images/rock3.png', 'images/rock4.png', null];
 var diff = {
 3: 10,
 4: 20,
@@ -42,20 +42,18 @@ function handleBoardClick(evt) {
     render();    
 } 
 
-function score() {
-    if (getMatches === true) {
-    //update score 
-        function handleUpdateScore(diff) {
-        scoreEl += diff;
-    // 2 matches in a row = +10pt bonus
-    // 3 matches in a row = +20pt bonus 
-    //4 matches in a row = +30pt bonus
+// function score() {
+    
+//     //update score 
+     
+//     // 2 matches in a row = +10pt bonus
+//     // 3 matches in a row = +20pt bonus 
+//     //4 matches in a row = +30pt bonus
 
-    }
-   //clear matched tiles
-    }
-    render();
-}
+//    //clear matched tiles
+//     }
+//     render();
+// }
 
 function clickCheck(clickedIdx) {
     if (firstRockIdx === null) {
@@ -91,20 +89,20 @@ function getColumnMatches() {
     return matches;
 }
 
-function getVerticalMatch(matches, col, offset) {
-    if (board[col + offset * boardSize] === board[col + offset * boardSize + boardSize] && board[col + offset * boardSize] === board[col + offset * boardSize + boardSize * 2]) {
+function getVerticalMatch(matches, col, offsetRow) {
+    if (board[col + offsetRow * boardSize] === board[col + offsetRow * boardSize + boardSize] && board[col + offsetRow * boardSize] === board[col + offsetRow * boardSize + boardSize * 2]) {
         var numRocks = 3;
-        while (board[col + offset * boardSize + boardSize * numRocks] === board[col + offset * boardSize]) {
+        while (board[col + offsetRow * boardSize + boardSize * numRocks] === board[col + offsetRow * boardSize]) {
             numRocks++;
         }
         var match = [];
         for (var i = 0; i < numRocks; i++) {
-            match.push(col + offset * boardSize + boardSize * i);
+            match.push(col + offsetRow * boardSize + boardSize * i);
         }
         matches.push(match);
-        return offset + numRocks;
+        return offsetRow + numRocks;
     } else {
-        return offset + 1;
+        return offsetRow + 1;
     }
 }
 
@@ -113,10 +111,27 @@ function getRowMatches() {
     for (var row = 0; row < boardSize; row++) {
         var nextOffset = 0;
         while (nextOffset < boardSize - 2) {
-            nextOffset = getVerticalMatch(matches, row, nextOffset);
+            nextOffset = getHorizontalMatch(matches, row, nextOffset);
         }
     }
     return matches;
+}
+
+function getHorizontalMatch(matches, row, offsetCol) {
+    if (board[row * boardSize + offsetCol] === board[row * boardSize + offsetCol + 1] && board[row * boardSize + offsetCol] === board[row * boardSize + offsetCol + 2]) {
+        var numRocks = 3;
+        while (board[row * boardSize + offsetCol + numRocks] === board[row * boardSize + offsetCol]) {
+            numRocks++;
+        }
+        var match = [];
+        for (var i = 0; i < numRocks; i++) {
+            match.push(row * boardSize + offsetCol + i);
+        }
+        matches.push(match);
+        return offsetCol + numRocks;
+    } else {
+        return offsetCol + 1;
+    }
 }
 
 function initialize() {
@@ -148,3 +163,6 @@ function getRockIndex() {
 // play again
 
 initialize();
+
+//scoring
+//go backwards if null fill from the spot above
