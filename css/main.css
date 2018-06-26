@@ -32,7 +32,10 @@ h2 {
     font-size: 25px;
 }
 
-
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
 
    
 .table-bordered {
