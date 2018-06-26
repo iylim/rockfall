@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="css/main.css" rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
     <script defer src="js/main.js"> </script>
     <title>RockFall!</title>
 </head>
@@ -20,84 +21,84 @@
     <div class="gameboard">  
         <table class="table table-bordered" id="board">
             <tr>
-                <td id="tile0"><img src=""></td>
-                <td id="tile1"><img src=""></td>
-                <td id="tile2"><img src=""></td>
-                <td id="tile3"><img src=""></td>
-                <td id="tile4"><img src=""></td>
-                <td id="tile5"><img src=""></td>
-                <td id="tile6"><img src=""></td>
-                <td id="tile7"><img src=""></td>
+                <td class ="selected" id="tile0"><img src=""></td>
+                <td class ="selected" id="tile1"><img src=""></td>
+                <td class ="selected" id="tile2"><img src=""></td>
+                <td class ="selected" id="tile3"><img src=""></td>
+                <td class ="selected" id="tile4"><img src=""></td>
+                <td class ="selected" id="tile5"><img src=""></td>
+                <td class ="selected" id="tile6"><img src=""></td>
+                <td class ="selected" id="tile7"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile8"><img src=""></td>
-                <td id="tile9"><img src=""></td>
-                <td id="tile10"><img src=""></td>
-                <td id="tile11"><img src=""></td>
-                <td id="tile12"><img src=""></td>
-                <td id="tile13"><img src=""></td>
-                <td id="tile14"><img src=""></td>
-                <td id="tile15"><img src=""></td>
+                <td class ="selected" id="tile8"><img src=""></td>
+                <td class ="selected" id="tile9"><img src=""></td>
+                <td class ="selected" id="tile10"><img src=""></td>
+                <td class ="selected" id="tile11"><img src=""></td>
+                <td class ="selected" id="tile12"><img src=""></td>
+                <td class ="selected" id="tile13"><img src=""></td>
+                <td class ="selected" id="tile14"><img src=""></td>
+                <td class ="selected" id="tile15"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile16"><img src=""></td>
-                <td id="tile17"><img src=""></td>
-                <td id="tile18"><img src=""></td>
-                <td id="tile19"><img src=""></td>
-                <td id="tile20"><img src=""></td>
-                <td id="tile21"><img src=""></td>
-                <td id="tile22"><img src=""></td>
-                <td id="tile23"><img src=""></td>
+                <td class ="selected" id="tile16"><img src=""></td>
+                <td class ="selected" id="tile17"><img src=""></td>
+                <td class ="selected" id="tile18"><img src=""></td>
+                <td class ="selected" id="tile19"><img src=""></td>
+                <td class ="selected" id="tile20"><img src=""></td>
+                <td class ="selected" id="tile21"><img src=""></td>
+                <td class ="selected" id="tile22"><img src=""></td>
+                <td class ="selected" id="tile23"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile24"><img src=""></td>
-                <td id="tile25"><img src=""></td>
-                <td id="tile26"><img src=""></td>
-                <td id="tile27"><img src=""></td>                
-                <td id="tile28"><img src=""></td>
-                <td id="tile29"><img src=""></td>
-                <td id="tile30"><img src=""></td>
-                <td id="tile31"><img src=""></td>
+                <td class ="selected" id="tile24"><img src=""></td>
+                <td class ="selected" id="tile25"><img src=""></td>
+                <td class ="selected" id="tile26"><img src=""></td>
+                <td class ="selected" id="tile27"><img src=""></td>                
+                <td class ="selected" id="tile28"><img src=""></td>
+                <td class ="selected" id="tile29"><img src=""></td>
+                <td class ="selected" id="tile30"><img src=""></td>
+                <td class ="selected" id="tile31"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile32"><img src=""></td>
-                <td id="tile33"><img src=""></td>
-                <td id="tile34"><img src=""></td>
-                <td id="tile35"><img src=""></td>
-                <td id="tile36"><img src=""></td>
-                <td id="tile37"><img src=""></td>
-                <td id="tile38"><img src=""></td>
-                <td id="tile39"><img src=""></td>
+                <td class ="selected" id="tile32"><img src=""></td>
+                <td class ="selected" id="tile33"><img src=""></td>
+                <td class ="selected" id="tile34"><img src=""></td>
+                <td class ="selected" id="tile35"><img src=""></td>
+                <td class ="selected" id="tile36"><img src=""></td>
+                <td class ="selected" id="tile37"><img src=""></td>
+                <td class ="selected" id="tile38"><img src=""></td>
+                <td class ="selected" id="tile39"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile40"><img src=""></td>
-                <td id="tile41"><img src=""></td>
-                <td id="tile42"><img src=""></td>
-                <td id="tile43"><img src=""></td>
-                <td id="tile44"><img src=""></td>
-                <td id="tile45"><img src=""></td>
-                <td id="tile46"><img src=""></td>
-                <td id="tile47"><img src=""></td>
+                <td class ="selected" id="tile40"><img src=""></td>
+                <td class ="selected" id="tile41"><img src=""></td>
+                <td class ="selected" id="tile42"><img src=""></td>
+                <td class ="selected" id="tile43"><img src=""></td>
+                <td class ="selected" id="tile44"><img src=""></td>
+                <td class ="selected" id="tile45"><img src=""></td>
+                <td class ="selected" id="tile46"><img src=""></td>
+                <td class ="selected" id="tile47"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile48"><img src=""></td>
-                <td id="tile49"><img src=""></td>
-                <td id="tile50"><img src=""></td>
-                <td id="tile51"><img src=""></td>
-                <td id="tile52"><img src=""></td>
-                <td id="tile53"><img src=""></td>
-                <td id="tile54"><img src=""></td>
-                <td id="tile55"><img src=""></td>
+                <td class ="selected" id="tile48"><img src=""></td>
+                <td class ="selected" id="tile49"><img src=""></td>
+                <td class ="selected" id="tile50"><img src=""></td>
+                <td class ="selected" id="tile51"><img src=""></td>
+                <td class ="selected" id="tile52"><img src=""></td>
+                <td class ="selected" id="tile53"><img src=""></td>
+                <td class ="selected" id="tile54"><img src=""></td>
+                <td class ="selected" id="tile55"><img src=""></td>
             </tr>
             <tr>
-                <td id="tile56"><img src=""></td>
-                <td id="tile57"><img src=""></td>
-                <td id="tile58"><img src=""></td>
-                <td id="tile59"><img src=""></td>
-                <td id="tile60"><img src=""></td>
-                <td id="tile61"><img src=""></td>
-                <td id="tile62"><img src=""></td>
-                <td id="tile63"><img src=""></td>
+                <td class ="selected" id="tile56"><img src=""></td>
+                <td class ="selected" id="tile57"><img src=""></td>
+                <td class ="selected" id="tile58"><img src=""></td>
+                <td class ="selected" id="tile59"><img src=""></td>
+                <td class ="selected" id="tile60"><img src=""></td>
+                <td class ="selected" id="tile61"><img src=""></td>
+                <td class ="selected" id="tile62"><img src=""></td>
+                <td class ="selected" id="tile63"><img src=""></td>
             </tr>
         </table>    
     </div>

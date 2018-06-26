@@ -20,7 +20,7 @@ var multiplier = {
 };
 
 /*----- app's state (variables) -----*/
-var board, firstRockIdx, score, matches;
+var board, firstRockIdx, score;
 var time, timerId;
 
 /*----- cached element references -----*/
@@ -28,13 +28,18 @@ var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
 
+
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
-//document.querySelector()
+
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
+    $('td').click(function(){
+        $("td").toggleClass("selected")
+    });
+
     if (!time) {
         time = 60;
         timeEl.textContent = time;
@@ -47,13 +52,19 @@ function handleBoardClick(evt) {
             }
         }, 1000); 
     }
-    if (!clickCheck(boardIndex)) firstRockIdx = null;
-    var matches = getMatches();
-    updateScore(matches);
-    clearRocks(matches);
-    collapseBoard(boardIndex);
-    render();    
+
+    if (!clickCheck(boardIndex)) firstRockIdx = null; 
+    else {
+        var matches = getMatches();
+        updateScore(matches);
+        clearRocks(matches);
+        collapseBoard();
+        // fillBoard();
+    }
+    render();
 } 
+
+
 
 function updateScore(matches) {
     var scoreA = 0;
@@ -64,7 +75,7 @@ function updateScore(matches) {
     for (i = 0; i < matches.length; i++) {
         scoreB = scoreB + points[matches[i].length];
     }
-    score = scoreA + scoreB;
+    score = score + scoreA + scoreB;
 }
     
 function clearRocks(matches) {
@@ -75,19 +86,40 @@ function clearRocks(matches) {
     });
 }
 
-function collapseBoard(boardIndex) {
-    for ( i = 63; i >= 0 ; i--) {
-        if (board[boardIndex] === null) {
-            var temp = board[boardIndex];
-            board[boardIndex] = board[boardIndex] - boardSize;
-            temp = board[boardIndex - boardSize];
-            }
-        }
-    }
+function collapseBoard() {
+    for (var colIdx = 0; colIdx < boardSize; colIdx++) {
+        collapseCol(colIdx);
+    }   
+    
+}
 
-//function refill(board) {
-//     if (boardIndex === null) getRockIndex();
-// }    
+function collapseCol(colIdx) {
+    var colArr = [];
+    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
+        colArr.push(board[colIdx + rowIdx * boardSize]);
+    }
+    colArr = colArr.reduce(function(newArr, rock) {
+        if (rock !== null)  newArr.push(rock);
+        return newArr;
+    }, []);
+    putArrAtBottomOfBoard(colArr, colIdx);
+    
+    fillBoard();
+    getMatches();
+}
+
+function putArrAtBottomOfBoard(arr, colIdx) {
+    while (arr.length < 8) arr.unshift(null);
+    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
+        board[colIdx + rowIdx * boardSize] = arr[rowIdx];
+    }
+}
+
+function fillBoard() {
+    board = board.map(function(rock) {
+        return rock === null ? getRockIndex() : rock;
+    });
+}
 
 function clickCheck(clickedIdx) {
     if (firstRockIdx === null) {
@@ -196,6 +228,9 @@ function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
 
+
+
+
 initialize();
 
-//disable click after second until board refilled?
+//disable click after second until board refilled
