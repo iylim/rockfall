@@ -11,7 +11,6 @@ body {
 }
 
 div.sidenav {
-    
     width: 150px;
     height: 502px;
     margin-top: -20px;
@@ -20,7 +19,12 @@ div.sidenav {
     align-content: center;
     overflow: hidden;
 }
-
+div.highscore {
+    position: relative;
+    border: 3px solid gold;
+    color: whitesmoke;
+    text-align: center;
+}
 
 p {
     height: 50px;
@@ -80,17 +84,3 @@ td img {
     background-color: peachpuff;
 }
 
-.animate {
-    animation-duration: 1s;
-    animation-name: easein;
-}
-
-@keyframes easein {
-    from {
-      margin-top: 0%;
-    }
-  
-    to {
-      margin-top: 40%;
-    }
-  }

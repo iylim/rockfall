@@ -19,6 +19,7 @@ var multiplier = {
 8: 150   
 };
 var sound = new Audio('https://freesound.org/data/previews/389/389618_6068748-lq.mp3');
+var highScores = [];
 
 /*----- app's state (variables) -----*/
 var board, firstRockEl, firstRockIdx, score, turnScore;
@@ -29,6 +30,7 @@ var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
 var roundScore = document.querySelector(".updatedscore");
+var currHS = document.querySelector(".highscore");
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
@@ -38,16 +40,20 @@ function handleBoardClick(evt) {
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
 
     if (!time) {
-        time = 60;
+        time = 6;
         timeEl.textContent = time;
         timerId = setInterval(function() {
             time--;
             timeEl.textContent = time;
             if (!time) {
                 clearInterval(timerId);
-                setTimeout(function() {alert('Game Over! Click anywhere to play again.')});
-                score = 0;
-            }
+                setTimeout(function() {
+                alert('Game Over! Click anywhere to play again.')
+                checkHighScore();
+                firstRockEl.classList.remove('selected');   
+                initialize();
+            });
+        }
         }, 1000); 
     }
 
@@ -212,6 +218,7 @@ function render() {
     });  
     scoreEl.textContent = score;
     roundScore.textContent = turnScore;
+    currHS.textContent = highScores;
 } 
 
 function initBoard() {
@@ -224,6 +231,18 @@ function initBoard() {
 function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
+
+function checkHighScore() {
+    score = score;
+    var highScore = localStorage.getItem("highscore");
+    if (score > highScore) {
+        localStorage.setItem("highscore", score);
+        highScores.push({name: window.prompt('Enter name below to log High Score.'), 
+        score: score 
+    });
+    }
+}
+
 
 
 initialize();
