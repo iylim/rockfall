@@ -63,7 +63,7 @@ td img {
     pointer-events: none;
 }
 
-selected {
+.selected {
     background-color: black;
     opacity: 0.7;
 }
