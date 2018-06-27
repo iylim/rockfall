@@ -25,11 +25,11 @@ div.sidenav {
 p {
     height: 50px;
     width: 100px;
-    padding: 10px;
     background-color:gray;
     border: 1px solid gold;
     border-radius: 15px;
     text-align: center;
+    padding-top: 3px;
     font-size: 16px;
     font-family: 'Trebuchet MS';
     margin: 30px auto 30px auto;
@@ -73,15 +73,24 @@ td {
 }
 
 td img {
-    pointer-events: none;
+    pointer-events: none;    
 }
 
 .selected {
     background-color: peachpuff;
-    opacity: 0.7;
 }
 
-button {
-    background-color: gray;
-    border-color: gold;
+.animate {
+    animation-duration: 1s;
+    animation-name: easein;
 }
+
+@keyframes easein {
+    from {
+      margin-top: 0%;
+    }
+  
+    to {
+      margin-top: 40%;
+    }
+  }

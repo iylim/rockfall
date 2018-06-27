@@ -18,20 +18,20 @@ var multiplier = {
 7: 100,
 8: 150   
 };
+var sound = new Audio('https://freesound.org/data/previews/389/389618_6068748-lq.mp3');
 
 /*----- app's state (variables) -----*/
-var board, firstRockIdx, score;
+var board, firstRockEl, firstRockIdx, score, turnScore;
 var time, timerId;
-var firstRockEl;
 
 /*----- cached element references -----*/
 var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
+var roundScore = document.querySelector(".updatedscore");
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
-// document.querySelector('button').addEventListener('click', popupHighScore)
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
@@ -72,6 +72,7 @@ function updateScore(matches) {
         scoreB = scoreB + points[matches[i].length];
     }
     score = score + scoreA + scoreB;
+    turnScore = scoreA + scoreB;
 }
     
 function clearRocks(matches) {
@@ -86,6 +87,7 @@ function collapseBoard() {
     for (var colIdx = 0; colIdx < boardSize; colIdx++) {
         collapseCol(colIdx);
     }   
+    sound.play();
 }
 
 function collapseCol(colIdx) {
@@ -209,6 +211,7 @@ function render() {
         img.src = rocks[board[idx]];
     });  
     scoreEl.textContent = score;
+    roundScore.textContent = turnScore;
 } 
 
 function initBoard() {
