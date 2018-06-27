@@ -13,10 +13,10 @@ var multiplier = {
 2: 10,
 3: 20,
 4: 30,
-5: 40,
-6: 50,
-7: 60,
-8: 75   
+5: 50,
+6: 70,
+7: 100,
+8: 150   
 };
 
 /*----- app's state (variables) -----*/
@@ -28,15 +28,15 @@ var firstRockEl;
 var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
- 
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
-
+// document.querySelector('button').addEventListener('click', popupHighScore)
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
+
     if (!time) {
         time = 60;
         timeEl.textContent = time;
@@ -45,18 +45,20 @@ function handleBoardClick(evt) {
             timeEl.textContent = time;
             if (!time) {
                 clearInterval(timerId);
-                setTimeout(function() {alert('game over')});
+                setTimeout(function() {alert('Game Over! Click anywhere to play again.')});
+                score = 0;
             }
         }, 1000); 
     }
 
-    if (!clickCheck(boardIndex, evt.target)) firstRockIdx = null; 
-    //reset 1st click
-    var matches = getMatches();
-    updateScore(matches);
-    clearRocks(matches);
-    collapseBoard();
-    fillBoard();
+    if (!clickCheck(boardIndex, evt.target)) {
+        firstRockIdx = null; 
+        var matches = getMatches();
+        updateScore(matches);
+        clearRocks(matches);
+        collapseBoard();
+        fillBoard();
+    }
     render();
 } 
 
@@ -125,7 +127,7 @@ function clickCheck(clickedIdx, clickedEl) {
                 var temp = board[clickedIdx];
                 board[clickedIdx] = board[firstRockIdx];
                 board[firstRockIdx] = temp;
-                return true;
+                return false;
             }
     }
     return false;
@@ -220,6 +222,5 @@ function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
 
-initialize();
 
-//auto clear matches from fillboard and fillboard
+initialize();
