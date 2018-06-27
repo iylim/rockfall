@@ -30,7 +30,7 @@ var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
 var roundScore = document.querySelector(".updatedscore");
-var currHS = document.querySelector(".highscore");
+//var currHS = document.querySelector(".highscore");
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
@@ -218,7 +218,7 @@ function render() {
     });  
     scoreEl.textContent = score;
     roundScore.textContent = turnScore;
-    currHS.textContent = highScores;
+    //currHS.textContent = highScores;
 } 
 
 function initBoard() {
@@ -233,16 +233,15 @@ function getRockIndex() {
 }
 
 function checkHighScore() {
-    score = score;
     var highScore = localStorage.getItem("highscore");
     if (score > highScore) {
         localStorage.setItem("highscore", score);
-        highScores.push({name: window.prompt('Enter name below to log High Score.'), 
+        highScores.push({name: "any", 
         score: score 
     });
     }
 }
 
-
+//'window.prompt('Enter name below to log High Score.')'
 
 initialize();
