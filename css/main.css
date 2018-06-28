@@ -91,13 +91,12 @@ div.popup {
     border: 1px solid gold;
     border-radius: 15px;
     color: whitesmoke;
-    box-shadow: 0 0 40px peachpuff;
+    box-shadow: 0 0 20px peachpuff;
     display:inline-block;
-    height:15%;
-    vertical-align:middle;
+    height:12%;
     position:fixed;
     text-align:center;
-    top:18%;
+    top:15%;
     width:30%;
     z-index:10000;
     background-color: gray;
@@ -105,3 +104,7 @@ div.popup {
     font-size: 16px;
 }
 
+button.close {
+    margin-top: -28px;
+    margin-right: 5px;
+}

@@ -2,24 +2,23 @@
 var boardSize = 8;
 var rocks = ['images/rock1.png', 'images/rock2.png', 'images/rock5.png', 'images/rock3.png', 'images/rock4.png', 'images/rock6.png'];
 var points = {
-3: 10,
-4: 20,
-5: 30,
-6: 50,
-7: 70,
-8: 100
+    3: 10,
+    4: 20,
+    5: 30,
+    6: 50,
+    7: 70,
+    8: 100
 };
 var multiplier = {
-2: 10,
-3: 20,
-4: 30,
-5: 50,
-6: 70,
-7: 100,
-8: 150   
+    2: 10,
+    3: 20,
+    4: 30,
+    5: 50,
+    6: 70,
+    7: 100,
+    8: 150   
 };
 var sound = new Audio('https://freesound.org/data/previews/389/389618_6068748-lq.mp3');
-
 
 /*----- app's state (variables) -----*/
 var board, firstRockEl, firstRockIdx, score, turnScore;
@@ -38,10 +37,10 @@ document.querySelector('.close').addEventListener('click', close);
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
+    if (time === 0) return;
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
-
-    if (!time) {
-        time = 6;
+    if (time === null) {
+        time = 60;
         timeEl.textContent = time;
         timerId = setInterval(function() {
             time--;
@@ -51,8 +50,6 @@ function handleBoardClick(evt) {
                 setTimeout(function() {
                 popup();
                 checkHighScore();
-                firstRockEl.classList.remove('selected');   
-                initialize();
             });
         }
         }, 1000); 
@@ -69,59 +66,6 @@ function handleBoardClick(evt) {
     render();
 } 
 
-function updateScore(matches) {
-    var scoreA = 0;
-    var scoreB = 0;
-    if (multiplier[matches.length]) {
-       scoreA = scoreA + multiplier[matches.length];
-    }
-    for (i = 0; i < matches.length; i++) {
-        scoreB = scoreB + points[matches[i].length];
-    }
-    score = score + scoreA + scoreB;
-    turnScore = scoreA + scoreB;
-}
-    
-function clearRocks(matches) {
-    matches.forEach(function(matchArr) {
-        matchArr.forEach(function(boardIndex) {
-            board[boardIndex] = null;
-        });
-    }); 
-}
-
-function collapseBoard() {
-    for (var colIdx = 0; colIdx < boardSize; colIdx++) {
-        collapseCol(colIdx);
-    }   
-    sound.play();
-}
-
-function collapseCol(colIdx) {
-    var colArr = [];
-    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
-        colArr.push(board[colIdx + rowIdx * boardSize]);
-    }
-    colArr = colArr.reduce(function(newArr, rock) {
-        if (rock !== null)  newArr.push(rock);
-        return newArr;
-    }, []);
-    putArrAtBottomOfBoard(colArr, colIdx);
-}
-
-function putArrAtBottomOfBoard(arr, colIdx) {
-    while (arr.length < 8) arr.unshift(null);
-    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
-        board[colIdx + rowIdx * boardSize] = arr[rowIdx];
-    }
-}
-
-function fillBoard() {
-    board = board.map(function(rock) {
-        return rock === null ? getRockIndex() : rock;
-    });
-}
-
 function clickCheck(clickedIdx, clickedEl) {
     if (firstRockIdx === null) {
         firstRockIdx = clickedIdx;
@@ -132,12 +76,12 @@ function clickCheck(clickedIdx, clickedEl) {
         firstRockEl.classList.remove('selected');  
         if (clickedIdx === firstRockIdx + 1 || clickedIdx === firstRockIdx - 1 ||
             clickedIdx === firstRockIdx + 8 || clickedIdx === firstRockIdx - 8) {
-                // swap
-                var temp = board[clickedIdx];
-                board[clickedIdx] = board[firstRockIdx];
-                board[firstRockIdx] = temp;
-                return false;
-            }
+            // swap
+            var temp = board[clickedIdx];
+            board[clickedIdx] = board[firstRockIdx];
+            board[firstRockIdx] = temp;
+            return false;
+        }
     }
     return false;
 }
@@ -205,11 +149,64 @@ function getHorizontalMatch(matches, row, offsetCol) {
     }
 }
 
+function updateScore(matches) {
+    var scoreA = 0;
+    var scoreB = 0;
+    if (multiplier[matches.length]) {
+       scoreA = scoreA + multiplier[matches.length];
+    }
+    for (i = 0; i < matches.length; i++) {
+        scoreB = scoreB + points[matches[i].length];
+    }
+    score = score + scoreA + scoreB;
+    turnScore = scoreA + scoreB;
+}
+    
+function clearRocks(matches) {
+    matches.forEach(function(matchArr) {
+        matchArr.forEach(function(boardIndex) {
+            board[boardIndex] = null;
+        });
+    }); 
+}
+
+function collapseBoard() {
+    for (var colIdx = 0; colIdx < boardSize; colIdx++) {
+        collapseCol(colIdx);
+    }   
+    sound.play();
+}
+
+function collapseCol(colIdx) {
+    var colArr = [];
+    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
+        colArr.push(board[colIdx + rowIdx * boardSize]);
+    }
+    colArr = colArr.reduce(function(newArr, rock) {
+        if (rock !== null)  newArr.push(rock);
+        return newArr;
+    }, []);
+    putArrAtBottomOfBoard(colArr, colIdx);
+}
+
+function putArrAtBottomOfBoard(arr, colIdx) {
+    while (arr.length < 8) arr.unshift(null);
+    for (var rowIdx = 0; rowIdx < boardSize; rowIdx++) {
+        board[colIdx + rowIdx * boardSize] = arr[rowIdx];
+    }
+}
+
+function fillBoard() {
+    board = board.map(function(rock) {
+        return rock === null ? getRockIndex() : rock;
+    });
+}
+
 function initialize() {
-    time = 0;
+    time = null;
     score = 0;
-    firstRockIdx = null;
     turnScore = 0;
+    firstRockIdx = null;
     initBoard();
     render();
 }
@@ -235,7 +232,6 @@ function getRockIndex() {
 }
 
 function checkHighScore() {
-    
     var highScore = localStorage.getItem('highscore');
     if (score > highScore) {
         var name =  window.prompt('Enter name below to log High Score.');
@@ -243,13 +239,14 @@ function checkHighScore() {
         localStorage.setItem('name', name);
     };
 }
+function popup() {
+    document.querySelector('.popup').style.visibility = "visible";
+}
 
 function close(evt) {
     document.querySelector('.popup').style.visibility = "hidden";
-}
-
-function popup() {
-    document.querySelector('.popup').style.visibility = "visible";
+    firstRockEl.classList.remove('selected');   
+    initialize();
 }
 
 initialize();
