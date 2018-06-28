@@ -34,13 +34,14 @@ var currHS = document.querySelector('.highscore');
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
+document.querySelector('.close').addEventListener('click', close);
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
 
     if (!time) {
-        time = 60;
+        time = 6;
         timeEl.textContent = time;
         timerId = setInterval(function() {
             time--;
@@ -48,7 +49,7 @@ function handleBoardClick(evt) {
             if (!time) {
                 clearInterval(timerId);
                 setTimeout(function() {
-                alert('Game Over! Click anywhere to play again.')
+                popup();
                 checkHighScore();
                 firstRockEl.classList.remove('selected');   
                 initialize();
@@ -208,6 +209,7 @@ function initialize() {
     time = 0;
     score = 0;
     firstRockIdx = null;
+    turnScore = 0;
     initBoard();
     render();
 }
@@ -233,13 +235,21 @@ function getRockIndex() {
 }
 
 function checkHighScore() {
-    score = score;
-    var name =  window.prompt('Enter name below to log High Score.');
+    
     var highScore = localStorage.getItem('highscore');
     if (score > highScore) {
+        var name =  window.prompt('Enter name below to log High Score.');
         localStorage.setItem('highscore', score);
         localStorage.setItem('name', name);
     };
+}
+
+function close(evt) {
+    document.querySelector('.popup').style.visibility = "hidden";
+}
+
+function popup() {
+    document.querySelector('.popup').style.visibility = "visible";
 }
 
 initialize();
