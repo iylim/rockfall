@@ -142,7 +142,7 @@ function clickCheck(clickedIdx, clickedEl) {
 }
 
 function getMatches() {
-    // return an array of "match" arrays [10, 11, 12] or [2, 10, 18]
+    // return an array of match arrays [10, 11, 12] or [2, 10, 18]
     var matches = getColumnMatches();
     matches.push(...getRowMatches());
     return matches;
