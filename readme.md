@@ -33,4 +33,4 @@ There are 6 different rocks.
 HTML5, CSS, Javascript, Bootstrap
 
 ### Next Steps 
-Unsolved problems and/or planned features.
+Add animations

@@ -40,7 +40,7 @@ function handleBoardClick(evt) {
     var boardIndex = parseInt(evt.target.id.replace('tile', '')); 
 
     if (!time) {
-        time = 6;
+        time = 60;
         timeEl.textContent = time;
         timerId = setInterval(function() {
             time--;
@@ -241,6 +241,5 @@ function checkHighScore() {
         localStorage.setItem('name', name);
     };
 }
-
 
 initialize();
