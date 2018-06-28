@@ -21,7 +21,7 @@ var multiplier = {
 var sound = new Audio('https://freesound.org/data/previews/389/389618_6068748-lq.mp3');
 
 /*----- app's state (variables) -----*/
-var board, firstRockEl, firstRockIdx, score, turnScore;
+var board, firstRockEl, firstRockIdx, score, turnScore, name;
 var time, timerId;
 
 /*----- cached element references -----*/
@@ -30,10 +30,14 @@ var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
 var roundScore = document.querySelector('.updatedscore');
 var currHS = document.querySelector('.highscore');
+var nameEl = document.querySelector('div.winner input');
+var gameOverModal = document.querySelector('.popup');
+var highScoreModal = document.querySelector('.winner');
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
 document.querySelector('.close').addEventListener('click', close);
+document.querySelector('.save').addEventListener('click', saveName);
 
 /*----- functions -----*/
 function handleBoardClick(evt) {
@@ -47,11 +51,8 @@ function handleBoardClick(evt) {
             timeEl.textContent = time;
             if (!time) {
                 clearInterval(timerId);
-                setTimeout(function() {
                 popup();
-                checkHighScore();
-            });
-        }
+            }
         }, 1000); 
     }
 
@@ -231,22 +232,27 @@ function getRockIndex() {
     return Math.floor(Math.random() * rocks.length);
 }
 
-function checkHighScore() {
-    var highScore = localStorage.getItem('highscore');
-    if (score > highScore) {
-        var name =  window.prompt('Enter name below to log High Score.');
-        localStorage.setItem('highscore', score);
-        localStorage.setItem('name', name);
-    };
-}
 function popup() {
-    document.querySelector('.popup').style.visibility = "visible";
+    firstRockEl.classList.remove('selected');  
+    var highScore = parseInt(localStorage.getItem('highscore'));
+    if (score > highScore) {
+        localStorage.setItem('highscore', score);
+        highScoreModal.style.visibility = 'visible';  
+    } else {
+        gameOverModal.style.visibility = 'visible';
+    }  
 }
 
-function close(evt) {
-    document.querySelector('.popup').style.visibility = "hidden";
-    firstRockEl.classList.remove('selected');   
+function close() {
+    gameOverModal.style.visibility = 'hidden';
     initialize();
+}
+
+function saveName() {
+    localStorage.setItem('name', nameEl.value); 
+    nameEl.value = '';
+    highScoreModal.style.visibility = 'hidden'; 
+    gameOverModal.style.visibility = 'visible';
 }
 
 initialize();

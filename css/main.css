@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+* {
+    color: whitesmoke;
+}
+
 body {
     margin: 0;
     background-color: rgb(46, 51, 51);
@@ -31,11 +35,9 @@ p {
     font-size: 15px;
     font-family: 'Trebuchet MS';
     margin: 30px auto 30px auto;
-    color: whitesmoke;
 }
 
 h2 {
-    color: whitesmoke; 
     text-align: center;
     font-size: 36px;
     font-family: 'Caesar Dressing', cursive;
@@ -52,7 +54,6 @@ footer {
     position: fixed;
     font-family: 'Trebuchet MS';
     font-size: 15px;
-    color: whitesmoke;
 }   
 
 .table-bordered {
@@ -85,19 +86,17 @@ td img {
     background-color: peachpuff;
 }
 
-div.popup {
+div.popup, div.winner {
     visibility: hidden;
     padding-top: 15px;
     border: 1px solid gold;
     border-radius: 15px;
-    color: whitesmoke;
     box-shadow: 0 0 20px peachpuff;
     display:inline-block;
-    height:12%;
     position:fixed;
     text-align:center;
     top:15%;
-    width:30%;
+    width:300px;
     z-index:10000;
     background-color: gray;
     font-family: 'Trebuchet MS';
@@ -107,4 +106,23 @@ div.popup {
 button.close {
     margin-top: -28px;
     margin-right: 5px;
+}
+
+div.winner {
+    height:120px;
+}
+
+div.popup {
+    height:80px;
+}
+
+input {
+    margin: 5px;
+    color: gray;
+}
+
+button.save {
+    margin: 5px;
+    color: gray;
+    background-color: peachpuff;
 }
