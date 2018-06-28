@@ -29,8 +29,8 @@ var time, timerId;
 var boardImages = document.querySelectorAll('#board td img');
 var timeEl = document.querySelector('.time');
 var scoreEl = document.querySelector('.score');
-var roundScore = document.querySelector(".updatedscore");
-var currHS = document.querySelector(".highscore");
+var roundScore = document.querySelector('.updatedscore');
+var currHS = document.querySelector('.highscore');
 
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleBoardClick);
