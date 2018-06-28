@@ -19,7 +19,7 @@ var multiplier = {
 8: 150   
 };
 var sound = new Audio('https://freesound.org/data/previews/389/389618_6068748-lq.mp3');
-var highScores;
+
 
 /*----- app's state (variables) -----*/
 var board, firstRockEl, firstRockIdx, score, turnScore;
@@ -218,7 +218,7 @@ function render() {
     });  
     scoreEl.textContent = score;
     roundScore.textContent = turnScore;
-    currHS.textContent = highScores;
+    currHS.textContent = `Name: ${localStorage.getItem('name')}, Score: ${localStorage.getItem('highscore')}`;
 } 
 
 function initBoard() {
@@ -233,13 +233,13 @@ function getRockIndex() {
 }
 
 function checkHighScore() {
-    var highScore = localStorage.getItem("highscore");
+    score = score;
+    var name =  window.prompt('Enter name below to log High Score.');
+    var highScore = localStorage.getItem('highscore');
     if (score > highScore) {
-        localStorage.setItem("highscore", score);
-        highScores.push({name: window.prompt('Enter name below to log High Score.'), 
-        score: score 
-    });
-    }
+        localStorage.setItem('highscore', score);
+        localStorage.setItem('name', name);
+    };
 }
 
 
