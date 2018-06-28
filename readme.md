@@ -1,6 +1,6 @@
 #Rockfall!
 
-(https://i.imgur.com/olg0JXqm.png" game)
+![alt text](https://i.imgur.com/olg0JXq.png)
 
 ## How to Play
 The objective of this game is to swap one rock with an adjacent rock to form a horizontal or vertical chain of three or more. Bonus points are given when more than three identical rocks are formed or forms two lines of identical rocks. Rocks disappear when chains are formed and rocks fall from the top to fill in gaps. 
