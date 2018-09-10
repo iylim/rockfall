@@ -28,7 +28,7 @@ There are 6 different rocks.
 * 8 matches in a row - 150 bonus pts.
  
 ## Getting Started
-[https://iylim.github.io/rockfall/]
+[Play Here](https://iylim.github.io/rockfall/)
 
 ### Technologies Used
 HTML5, CSS, Javascript, Bootstrap
